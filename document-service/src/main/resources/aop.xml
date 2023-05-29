@@ -1,0 +1,3 @@
+<weaver options="-verbose">
+    <include within="document-service..*"/>
+</weaver>
