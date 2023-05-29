@@ -1,5 +1,7 @@
 package uz.devops.documentsservice;
 
+import com.amazonaws.services.simpleworkflow.flow.annotations.Activities;
+import com.amazonaws.services.simpleworkflow.flow.annotations.ActivityRegistrationOptions;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
@@ -30,6 +32,9 @@ interface DocumentRepository extends JpaRepository<Document, Long> {
 @RequestMapping("/api/comments")
 @RequiredArgsConstructor
 @Slf4j
+@ActivityRegistrationOptions(defaultTaskScheduleToStartTimeoutSeconds = 300,
+        defaultTaskStartToCloseTimeoutSeconds = 10)
+@Activities(version="1.0")
 class DocumentController{
     private final DocumentRepository documentRepository;
 

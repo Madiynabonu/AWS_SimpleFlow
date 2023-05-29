@@ -1,6 +1,8 @@
 package uz.devops.detailsservice;
 
 
+import com.amazonaws.services.simpleworkflow.flow.annotations.Activities;
+import com.amazonaws.services.simpleworkflow.flow.annotations.ActivityRegistrationOptions;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
@@ -18,6 +20,9 @@ public class DetailsServiceApplication {
 @RequestMapping("/api/bank-details")
 @RequiredArgsConstructor
 @Slf4j
+@ActivityRegistrationOptions(defaultTaskScheduleToStartTimeoutSeconds = 300,
+        defaultTaskStartToCloseTimeoutSeconds = 10)
+@Activities(version="1.0")
 class BankDetailsController {
     private final BankDetailsRepository bankDetailsRepository;
 

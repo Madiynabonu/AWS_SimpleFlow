@@ -1,5 +1,7 @@
 package uz.devops.bankservice;
 
+import com.amazonaws.services.simpleworkflow.flow.annotations.Activities;
+import com.amazonaws.services.simpleworkflow.flow.annotations.ActivityRegistrationOptions;
 import feign.RetryableException;
 import feign.Retryer;
 import jakarta.persistence.Entity;
@@ -42,6 +44,10 @@ public class BankServiceApplication {
     }
 }
 
+
+@ActivityRegistrationOptions(defaultTaskScheduleToStartTimeoutSeconds = 300,
+        defaultTaskStartToCloseTimeoutSeconds = 10)
+@Activities(version="1.0")
 @RestController
 @RequestMapping("/api/posts")
 @RequiredArgsConstructor
